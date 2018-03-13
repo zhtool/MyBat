@@ -1,0 +1,36 @@
+set pages 0 
+set lines 100
+
+conn /as sysdba;
+spool Loads_log.log
+prompt AUTHOR:ZH 2016/02/27
+prompt 
+select name from hospital.hosp_;
+select '------START:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+
+conn hscenter/hscenter;
+show user;
+prompt ===[LoadHsCenterPck]===
+@LOAD_HSCENTER.TXT;
+
+conn hsemr/hsemr;
+show user;
+prompt ===[LoadHsEmrPck]===
+@LOAD_HSEMR.TXT;
+DROP PACKAGE HSEMR.VITAL_RECORD;
+
+conn hsois/hsois;
+show user;
+prompt ===[LoadHsOisPck]===
+@LOAD_HSOIS.TXT;
+
+conn hospital/source;
+show user;
+prompt ===[LOAD_HOSPITAL]===
+@LOAD_HOSPITAL.TXT;
+
+select '------END:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+
+spool off
+
+exit

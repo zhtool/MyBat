@@ -1,0 +1,30 @@
+set pages 0 
+set lines 100
+spool log\CrtCrtAmqp_log.log
+prompt AUTHOR:ZH 2016/02/27
+prompt
+
+select name || ';' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') h
+  from hospital.hosp;
+  from dual;
+prompt 
+prompt ------START------
+prompt 
+
+show user;
+
+PROMPT
+PROMPT 创建表空间....
+PROMPT
+
+create user amqp identified by amqp;
+grant resource to amqp;
+grant connect to amqp;
+grant create session to amqp;
+
+prompt ------END------
+
+select 'ZH_hint:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') d from dual;
+spool off
+
+
