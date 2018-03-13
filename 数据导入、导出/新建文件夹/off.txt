@@ -1,0 +1,22 @@
+create or replace trigger trig_logoff_init
+  before logoff on database
+declare
+  i number;
+begin
+    begin
+      select 2 into i from hospital.worker where id = substrb( user,3,6);
+      delete from hospital.login_info
+       where workerid = substrb(user,3,6)
+         and sid = sys_context('USERENV', 'SID');
+
+      update hospital.login_log
+         set logoff_time = sysdate
+       where sid = sys_context('USERENV', 'SID')
+         and workerid =  substrb(user,3,6)
+         and logoff_time is null;
+    exception
+      when others then
+        null;
+    end;
+end trig_logoff_init;
+/

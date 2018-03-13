@@ -1,0 +1,15 @@
+spool OutSql\AlterTabModify.log;
+
+select 'alter table  ' || user || '.' || table_name || ' modify ' ||
+       column_name || ' ' ||
+       decode(data_type,
+              'DATE',
+              data_type,
+              'BLOB',
+              data_type,
+              data_type || '(' || data_length || ')') || ';' s_modify
+  from all_tab_columns a
+ where owner = user
+--and table_name = 'ALL_WORKER_'
+ order by table_name, column_id;
+spool off

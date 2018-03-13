@@ -1,0 +1,8 @@
+begin
+  sys.dbms_job.submit(job => :job,
+                      what => 'HOSPITAL.HIS_ANALYSER.S_LOAD_MDEPT_ERROR_ANALYSER;',
+                      next_date => to_date('01-08-2012 02:00:00', 'dd-mm-yyyy hh24:mi:ss'),
+                      interval => 'TRUNC(SYSDATE)+1+2/24');
+  commit;
+end;
+/

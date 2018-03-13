@@ -1,0 +1,50 @@
+set pages 0 
+set lines 100
+conn /as sysdba;
+spool .\log\grant_execute.sql
+select 'grant execute on ' || owner || '.' || object_name || ' to hsemr;' s_emr,
+       'grant execute on ' || owner || '.' || object_name ||
+       ' to hospital;' s_hospital,
+       'grant execute on ' || owner || '.' || object_name || ' to hsois;' s_ois
+  from all_objects
+ where owner = 'HSCENTER'
+   and object_type in ('FUNCTION', 'PACKAGE', 'PROCEDURE')
+ order by object_name;
+
+select 'grant select on ' || owner || '.' || object_name || ' to HSEMR;' s1,
+       'grant select on ' || owner || '.' || object_name || ' to HOSPITAL;' s2,
+       'grant select on ' || owner || '.' || object_name || ' to HSOIS;' s3
+  from all_objects
+ where owner = 'HSCENTER'
+   and object_type in ('TABLE', 'VIEW')
+ order by object_name;
+
+select 'grant execute on ' || owner || '.' || object_name || ' to hsemr;' s_emr,
+       'grant execute on ' || owner || '.' || object_name ||
+       ' to HSHIS;' s_HSHIS,
+       'grant execute on ' || owner || '.' || object_name || ' to hsois;' s_ois
+  from all_objects
+ where owner = 'HOSPITAL'
+   and object_type in ('FUNCTION', 'PACKAGE', 'PROCEDURE')
+ order by object_name;
+
+select 'grant select on ' || owner || '.' || object_name || ' to HSEMR;' s1,
+       'grant select on ' || owner || '.' || object_name || ' to HSCNETER;' s2,
+       'grant select on ' || owner || '.' || object_name || ' to HSOIS;' s3
+  from all_objects
+ where owner = 'HOSPITAL'
+   and object_type in ('TABLE', 'VIEW')
+ order by object_name;
+
+spool off
+
+conn sys/tigersysdba@his as sysdba;
+grant execute on sys.dbms_crypto to hospital;
+grant execute on sys.dbms_alert to hospital;
+
+conn /as sysdba;
+
+select 'ZH_hint:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') d from dual;
+spool off
+
+exit

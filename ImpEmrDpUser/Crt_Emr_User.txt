@@ -1,0 +1,168 @@
+conn system/tigersysdba;
+
+spool Crt_Emr_User_log.log
+
+create directory dpdata1 as 'd:\test\dump';
+rem 导入空表
+alter system set deferred_segment_creation=false; 
+
+PROMPT
+PROMPT 创建用户 HSCENTER
+PROMPT
+create tablespace HSCENTER  logging  datafile 'D:\APP\ADMINISTRATOR\ORADATA\his\HSCENTER.dbf' size 50m  autoextend on  next 50m maxsize 8001m  extent management local; 
+--创建用户HSCENTER
+create user HSCENTER identified by HSCENTER DEFAULT TABLESPACE HSCENTER;
+grant resource to HSCENTER;
+grant connect to HSCENTER;
+grant hshis_user to HSCENTER;
+grant execute on hospital.verify_length to hscenter;
+grant execute on hospital.login to hscenter;
+grant execute on hospital.VERIFY_WORKER to hscenter;
+grant execute on hospital.verify_department to hscenter;
+grant execute on hospital.verify_valid_number to hscenter;
+GRANT "CONNECT" TO "HSCENTER"  ;
+GRANT "RESOURCE" TO "HSCENTER"  ;
+GRANT CREATE SESSION TO "HSCENTER"  ;
+GRANT CREATE SYNONYM TO "HSCENTER"  ;
+GRANT CREATE TABLE TO "HSCENTER"  ;
+GRANT CREATE TABLESPACE TO "HSCENTER"  ;
+GRANT CREATE TRIGGER TO "HSCENTER"  ;
+GRANT CREATE TYPE TO "HSCENTER"  ;
+GRANT CREATE VIEW TO "HSCENTER"  ;
+GRANT CREATE SEQUENCE TO "HSCENTER"  ;
+GRANT "HSHIS_USER" TO "HSCENTER"  ;
+
+
+PROMPT
+PROMPT 创建用户 HSEMR
+PROMPT
+CREATE SMALLFILE TABLESPACE "HSEMR_TAB" DATAFILE
+  'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M
+  LOGGING EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+
+CREATE SMALLFILE TABLESPACE "HSEMR_IND" DATAFILE
+  'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_IND.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M
+  LOGGING EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+
+ALTER TABLESPACE "HSEMR_TAB" ADD DATAFILE
+'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB001.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M;
+ALTER TABLESPACE "HSEMR_TAB" ADD DATAFILE
+'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB002.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M;
+ALTER TABLESPACE "HSEMR_TAB" ADD DATAFILE
+'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB003.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M;
+ALTER TABLESPACE "HSEMR_TAB" ADD DATAFILE
+'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB004.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M;
+ALTER TABLESPACE "HSEMR_TAB" ADD DATAFILE
+'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB005.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M;
+ALTER TABLESPACE "HSEMR_TAB" ADD DATAFILE
+'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB006.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M;
+ALTER TABLESPACE "HSEMR_TAB" ADD DATAFILE
+'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB007.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M;
+ALTER TABLESPACE "HSEMR_TAB" ADD DATAFILE
+'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB008.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M;
+ALTER TABLESPACE "HSEMR_TAB" ADD DATAFILE
+'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB009.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M;
+ALTER TABLESPACE "HSEMR_TAB" ADD DATAFILE
+'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSEMR_TAB010.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M;
+
+CREATE USER "HSEMR"  PROFILE "DEFAULT" IDENTIFIED BY "HSEMR" DEFAULT TABLESPACE "HSEMR_TAB" TEMPORARY TABLESPACE "TEMP" ACCOUNT UNLOCK;
+GRANT "CONNECT" TO "HSEMR"  ;
+GRANT "RESOURCE" TO "HSEMR"  ;
+GRANT CREATE SESSION TO "HSEMR"  ;
+GRANT CREATE SYNONYM TO "HSEMR"  ;
+GRANT CREATE TABLE TO "HSEMR"  ;
+GRANT CREATE TABLESPACE TO "HSEMR"  ;
+GRANT CREATE TRIGGER TO "HSEMR"  ;
+GRANT CREATE TYPE TO "HSEMR"  ;
+GRANT CREATE VIEW TO "HSEMR"  ;
+GRANT CREATE SEQUENCE TO "HSEMR"  ;
+GRANT "HSHIS_USER" TO "HSEMR"  ;
+grant dba to "HSEMR" ;
+
+
+
+PROMPT
+PROMPT 创建用户 HSOIS
+PROMPT
+
+CREATE SMALLFILE TABLESPACE "HSOIS_TAB" DATAFILE
+  'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSOIS_TAB.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M
+  LOGGING EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+
+CREATE SMALLFILE TABLESPACE "HSOIS_IND" DATAFILE
+  'D:\APP\ADMINISTRATOR\ORADATA\HIS\HSOIS_IND.DBF' SIZE 10M AUTOEXTEND ON NEXT 100M MAXSIZE 8001M
+  LOGGING EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+
+CREATE USER "HSOIS"  PROFILE "DEFAULT" IDENTIFIED BY "HSOIS" DEFAULT TABLESPACE "HSOIS_TAB" TEMPORARY TABLESPACE "TEMP" ACCOUNT UNLOCK;
+GRANT "CONNECT" TO "HSOIS"  ;
+GRANT "RESOURCE" TO "HSOIS"  ;
+GRANT CREATE SESSION TO "HSOIS"  ;
+GRANT CREATE SYNONYM TO "HSOIS"  ;
+GRANT CREATE TABLE TO "HSOIS"  ;
+GRANT CREATE TABLESPACE TO "HSOIS"  ;
+GRANT CREATE TRIGGER TO "HSOIS"  ;
+GRANT CREATE TYPE TO "HSOIS"  ;
+GRANT CREATE VIEW TO "HSOIS"  ;
+GRANT CREATE SEQUENCE TO "HSOIS"  ;
+GRANT "HSHIS_USER" TO "HSOIS"  ;
+grant dba to HSOIS;
+
+PROMPT
+PROMPT 创建用户hshis
+PROMPT
+create user hshis  identified by  hshis;
+grant connect to hshis;
+grant resource to hshis ;
+grant create session to hshis ;
+
+grant hshis_user to hshis;
+grant execute on login to hshis;
+grant execute on dr_schedule to hshis;
+
+REM conn hshis/hshis@his;
+grant execute on dr_schedule to hospital;
+
+grant execute on hospital.verify_not_null to hscenter;
+grant execute on hospital.worker_role_  to hscenter;
+
+prompt 《grant》
+grant execute on hospital.login to hsemr;
+grant execute on hospital.verify_not_null to hscenter;
+grant execute on hospital.get_worker_name to hsemr;
+grant execute on hospital.get_dept_name to hsemr;
+grant execute on hospital.get_resident_age_unit to hsemr;
+grant execute on hospital.get_resident_age_num to hsemr;
+grant execute on hospital.get_resident_age to hsemr;
+grant execute on hospital.get_patient_name to hsemr;
+grant execute on hospital.get_worker_dept_name to hsemr;
+grant execute on hospital.get_field_dict_name to hsemr;
+grant execute on hospital.get_resident_name to hsemr;
+grant execute on hospital.login to hsemr;
+
+grant execute on hospital.verify_length to hscenter;
+grant execute on hospital.verify_valid_number to hscenter;
+grant execute on hospital.verify_worker to hscenter;
+grant execute on hospital.login to hscenter;
+grant execute on hospital.verify_department to hscenter;
+grant select  on hospital.worker_role_  to hscenter;
+
+grant select on hospital.all_worker to hsemr;
+grant select on hospital.all_department to hsemr;
+grant select on hospital.hosp to hsemr;
+grant select on hospital.worker_dept to hsemr;
+grant select,update on hospital.case_page1_ to hsemr;
+grant select on hospital.patient to hsemr;
+grant select on hospital.resident_patient to hsemr;
+grant select on hospital.operation_record_ to hsemr;
+grant select on hospital.diagnose_ to hsemr;
+grant execute on hospital.get_sundry_fee_name to hsemr;
+grant select on hospital.order_list to hsemr;
+grant all on hospital.resident_info_ to hsemr;
+grant select on hospital.clinic_log_register_ to hsemr;
+
+grant select,update on hospital.patient_ to hsemr;
+alter table hospital.DIAGNOSE_ modify ATTRIBUTE varchar(30);
+  
+spool off
+
+exit

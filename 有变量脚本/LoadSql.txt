@@ -1,0 +1,55 @@
+SET LINES 50
+SET PAGES 0
+SET ECHO off
+
+DEFINE s_url="http://192.168.0.170"
+rem DEFINE s_url="http://127.0.0.1"
+
+spool log\log.log
+
+prompt AUTHOR:ZH 2016/11/01
+prompt 
+select name  h   from hospital.hosp;
+select '------START:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+show user;
+
+prompt 
+prompt <原值>
+prompt 
+
+select owner, WEBSERVICE_URL
+  from hscenter.app_config_
+ where net_type = '1'
+ order by WEBSERVICE_URL;
+
+prompt 
+prompt <修改>
+prompt 
+
+update hscenter.app_config
+   set WEBSERVICE_URL = '&s_url' ||
+             decode(OWNER,
+                    'HSCENTER',
+                    ':9000',
+                    'HSHIS',
+                    ':9001',
+                    'HSEMR',
+                    ':9002',
+                    'HSOIS',
+                    ':9003',
+                    'HSINS',
+                    ':9004',
+                    ':8080')
+ where net_type = '1';
+ commit;
+prompt 
+prompt <新值>
+prompt 
+
+select owner, WEBSERVICE_URL
+  from hscenter.app_config_
+ where net_type = '1'
+ order by WEBSERVICE_URL;
+select '------END:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+spool off
+exit

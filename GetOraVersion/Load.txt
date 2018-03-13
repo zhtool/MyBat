@@ -1,0 +1,17 @@
+SET LINES 100
+SET PAGES 0
+SET ECHO off
+conn /as sysdba;
+spool log.log
+
+prompt AUTHOR:ZH 2016/11/01
+prompt 
+select name  h   from hospital.hosp;
+select '------START:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+show user;
+
+prompt <Version> 
+select * from v$version;
+select '------END:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+spool off
+exit

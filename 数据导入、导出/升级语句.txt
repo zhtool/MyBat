@@ -1,0 +1,57 @@
+
+------------------------------------------------下面正确
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy1.txt fromuser=hospital touser=hospital BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy2.txt fromuser=human touser=human BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy3.txt fromuser=ver touser=ver BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+ 
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy4.txt fromuser=HSECASE touser=HSECASE BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy5.txt fromuser=HSTEND touser=HSTEND BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy6.txt fromuser=HSDOC touser=HSDOC BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy7.txt fromuser=HSRPT touser=HSRPT BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy8.txt fromuser=COOPERATEHIS touser=COOPERATEHIS BUFFER=955500 IGNORE=Y  STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy9.txt fromuser=EBL touser=EBL BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy10.txt fromuser=lisif touser=lisif BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy11.txt fromuser=LZYB touser=LZYB BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy12.txt fromuser=HOSPREAD touser=HOSPREAD BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy13.txt fromuser=ZLYB touser=ZLYB BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy14.txt fromuser=COMED touser=COMED BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+  
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy15.txt fromuser=MEDINSURE touser=MEDINSURE BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy16.txt fromuser=HSMC touser=HSMC BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy17.txt fromuser=HOSP touser=HOSP BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy18.txt fromuser=HSOPER touser=HSOPER BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp log=D:\dxyy19.txt fromuser=QYYB touser=QYYB BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp  log=D:\dxyy20.txt fromuser=PACSIF touser=PACSIF BUFFER=955500 IGNORE=Y STATISTICS=NONE 
+
+imp system/tigersysdba@his file=d:\dxyy.dmp  log=D:\dxyy21.txt fromuser=ZDWXAPI touser=ZDWXAPI BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp  log=D:\dxyy22.txt fromuser=HSMC touser=HSMC BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp  log=D:\dxyy23.txt fromuser=HSCITYMC touser=HSCITYMC BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp  log=D:\dxyy24.txt fromuser=HSCENTER touser=HSCENTER BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp  log=D:\dxyy25.txt fromuser=HSINS touser=HSINS BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp  log=D:\dxyy26.txt fromuser=HSINS_MI touser=HSINS_MI BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+
+imp system/tigersysdba@his file=d:\dxyy.dmp  log=D:\dxyy27.txt fromuser=HSEMR touser=HSEMR BUFFER=955500 IGNORE=Y STATISTICS=NONE  
+

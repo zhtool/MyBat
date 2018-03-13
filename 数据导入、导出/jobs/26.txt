@@ -1,0 +1,8 @@
+begin
+  sys.dbms_job.submit(job => :job,
+                      what => 'HOSPITAL.AUTO_JOBS.PM12_JOBS;',
+                      next_date => to_date('14-10-2012 23:55:12', 'dd-mm-yyyy hh24:mi:ss'),
+                      interval => 'TRUNC(SYSDATE)+1+23.92/24');
+  commit;
+end;
+/

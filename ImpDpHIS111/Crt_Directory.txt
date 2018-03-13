@@ -1,0 +1,16 @@
+conn system/tigersysdba;
+create directory dpdata1 as 'd:\test\dump';
+
+rem 创建表，未插入数据前不分配空间，为true时，不分配空间 
+alter system set deferred_segment_creation=false; 
+rem 不区分大小写
+ALTER SYSTEM SET SEC_CASE_SENSITIVE_LOGON = FALSE; 
+rem alter system set processes=500 scope=spfile;
+rem alter system set sga_target =1024M scope=spfile; 
+rem alter system set db_files =1024 scope=spfile;
+ALTER PROFILE "DEFAULT" LIMIT FAILED_LOGIN_ATTEMPTS UNLIMITED;
+
+GRANT EXECUTE ON SYS.DBMS_ALERT TO HOSPITAL;
+GRANT EXECUTE ON SYS.DBMS_CRYPTO TO HOSPITAL;
+
+exit

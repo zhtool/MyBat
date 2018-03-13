@@ -1,0 +1,1 @@
+exp system/tigersysdba@his file=d:\dxyy.dmp log=d:\dxyy.log full=y

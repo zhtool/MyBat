@@ -1,0 +1,10 @@
+wrap iname=D:\MIS\HSMP\HSHIS5\HSSQL5\pack\invoice_man.pck oname=E:\MyTools\MyBat\LoadPlbs\Load_Plb\FILES\PLBS\HOSPITAL_PLB\invoice_man.plb                                                                                                                                                                  
+wrap iname=D:\MIS\HSMP\HSHIS5\HSSQL5\pack\ol_acc.pck oname=E:\MyTools\MyBat\LoadPlbs\Load_Plb\FILES\PLBS\HOSPITAL_PLB\ol_acc.plb                                                                                                                                                                            
+wrap iname=D:\MIS\HSMP\HSHIS5\HSSQL5\pack\ol_input.pck oname=E:\MyTools\MyBat\LoadPlbs\Load_Plb\FILES\PLBS\HOSPITAL_PLB\ol_input.plb                                                                                                                                                                        
+wrap iname=D:\MIS\HSMP\HSHIS5\HSSQL5\pack\ol_mhc.pck oname=E:\MyTools\MyBat\LoadPlbs\Load_Plb\FILES\PLBS\HOSPITAL_PLB\ol_mhc.plb                                                                                                                                                                            
+wrap iname=D:\MIS\HSMP\HSHIS5\HSSQL5\pack\pres.pck oname=E:\MyTools\MyBat\LoadPlbs\Load_Plb\FILES\PLBS\HOSPITAL_PLB\pres.plb                                                                                                                                                                                
+wrap iname=D:\MIS\HSMP\HSHIS5\HSSQL5\proc\get_order_method_unit.sql oname=E:\MyTools\MyBat\LoadPlbs\Load_Plb\FILES\PLBS\HOSPITAL_PLB\get_order_method_unit.plb                                                                                                                                              
+wrap iname=D:\MIS\HSMP\HSHIS5\HSSQL5\proc\get_药品处方类型.sql oname=E:\MyTools\MyBat\LoadPlbs\Load_Plb\FILES\PLBS\HOSPITAL_PLB\get_药品处方类型.plb                                                                                                                                                        
+
+已选择7行。
+

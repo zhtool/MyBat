@@ -1,0 +1,38 @@
+--门诊相关业务表
+truncate table hsins.clinic_balance_;
+truncate table hsins.clinic_pack_;
+truncate table hsins.clinic_pack_detail_;
+truncate table hsins.clinic_transfer_log_;
+truncate table hsins.clinic_visit_;
+
+truncate table hsins_mi.mi_clinic_balance_;
+truncate table hsins_mi.mi_clinic_transfer_log_;
+truncate table hsins_mi.mi_clinic_visit_;
+--住院相关业务表
+truncate table hsins.resident_balance_;
+truncate table hsins.resident_transfer_log_;
+truncate table hsins.resident_visit_;
+truncate table hsins_mi.mi_resident_balance_;
+truncate table hsins_mi.mi_resident_transfer_log_;
+truncate table hsins_mi.mi_resident_visit_;
+truncate table hsins_mi.mi_resident_visit_out_;
+
+--配置数据表
+
+truncate table hsins.collate_dept_;
+truncate table hsins.collate_material_;
+truncate table hsins.collate_sundry_fee_;
+
+truncate table hsins.insurance_dept_;
+truncate table hsins.insurance_material_;
+truncate table hsins.insurance_sundry_fee_;
+
+truncate table hsins.interface_card_info_;
+truncate table hsins_mi.mi_card_info_;
+
+truncate table hsins_mi.mi_disease_;
+
+--日志记录表
+truncate table hsins.operation_log_;
+truncate table hsins.ibatis_log_;
+truncate table hsins_mi.mi_rollback_info_;

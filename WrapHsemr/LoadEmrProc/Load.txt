@@ -1,0 +1,86 @@
+set pages 0 
+set lines 100
+
+conn hsemr/hsemr@his;
+spool log\log.log
+prompt AUTHOR:ZH 2016/02/27
+prompt
+
+select hospital.get_system_option('医院名称') || ';' || user || ';' ||
+       to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') h
+  from dual;
+prompt 
+prompt ------START------
+prompt 
+
+show user;
+
+prompt 当前版本:
+
+
+prompt ===[LoadPck]===
+prompt <PCK_BD> 
+@../plb/PCK_BD.plb;
+prompt <PCK_CASE_PAGE1_> 
+@../plb/PCK_CASE_PAGE1_.plb;
+prompt <PCK_COMMENTS> 
+@../plb/PCK_COMMENTS.plb;
+prompt <PCK_DG> 
+@../plb/PCK_DG.plb;
+prompt <PCK_EC> 
+@../plb/PCK_EC.plb;
+prompt <PCK_EMR_PATIENT> 
+rem @../plb/PCK_EMR_PATIENT.plb;
+prompt <PCK_KB> 
+@../plb/PCK_KB.plb;
+prompt <PCK_MF> 
+@../plb/PCK_MF.plb;
+prompt <PCK_MR> 
+@../plb/PCK_MR.plb;
+prompt <PCK_NR> 
+@../plb/PCK_NR.plb;
+prompt <PCK_PV> 
+@../plb/PCK_PV.plb;
+prompt <PCK_SEQS> 
+@../plb/PCK_SEQS.plb;
+prompt <PCK_TEMPLET> 
+@../plb/PCK_TEMPLET.plb;
+prompt <PCK_TEST> 
+rem @../plb/PCK_TEST.plb;
+prompt <PCK_VITAL> 
+@../plb/PCK_VITAL.plb;
+prompt <PCK_VITAL_RECORD> 
+rem @../plb/PCK_VITAL_RECORD.plb;
+prompt <PCK_VS> 
+@../plb/PCK_VS.plb;
+prompt <PCK_WF> 
+rem @../plb/PCK_WF.plb;
+
+
+prompt ===[grant]===
+grant execute on PCK_BD to hshis_user;
+grant execute on PCK_CASE_PAGE1_ to hshis_user;
+grant execute on PCK_COMMENTS to hshis_user;
+grant execute on PCK_DG to hshis_user;
+grant execute on PCK_EC to hshis_user;
+grant execute on PCK_EMR_PATIENT to hshis_user;
+grant execute on PCK_KB to hshis_user;
+grant execute on PCK_MF to hshis_user;
+grant execute on PCK_MR to hshis_user;
+grant execute on PCK_NR to hshis_user;
+grant execute on PCK_PV to hshis_user;
+grant execute on PCK_SEQS to hshis_user;
+grant execute on PCK_TEMPLET to hshis_user;
+grant execute on PCK_TEST to hshis_user;
+grant execute on PCK_VITAL to hshis_user;
+grant execute on PCK_VS to hshis_user;
+grant execute on PCK_WF to hshis_user;
+
+prompt 升级后版本:
+
+prompt ------END------
+
+select 'ZH_hint:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') d from dual;
+spool off
+
+exit

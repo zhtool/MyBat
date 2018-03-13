@@ -1,0 +1,67 @@
+set pages 0 
+set lines 100
+
+conn Hospital/source@his;
+rem conn Hscenter/hscenter@his;
+rem conn Hsois/hsois@his;
+rem conn Hshis/hshis@His;
+rem conn Hsemr/hsemr@his;
+
+rem @sql\AlterTabAdd.txt;
+rem @sql\AlterTabModify.txt;
+
+spool log\log.log
+prompt AUTHOR:ZH 2016/08/18
+prompt
+
+select hospital.get_system_option('医院名称') || ';' || user || ';' ||
+       to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') h
+  from dual;
+prompt 
+prompt ------START------
+prompt 
+
+prompt 当前版本:
+
+conn Hospital/source@his;
+prompt ===[AlterHospitalTab]===
+prompt 
+show user;
+@OutSql\AlterHospitalTabAdd.log;
+@OutSql\AlterHospitalTabModify.log;
+
+conn Hscenter/hscenter@his;
+prompt ===[AlterHscenterTab]===
+prompt 
+show user;
+@OutSql\AlterHscenterTabAdd.log;
+rem @OutSql\AlterHscenterTabModify.log;
+
+conn Hsemr/hsemr@his;
+prompt ===[AlterHsemrTabTab]===
+prompt 
+show user;
+@OutSql\AlterHsemrTabTabAdd.log;
+rem @OutSql\AlterHsemrTabTabModify.log;
+
+
+rem conn Hsois/hsois@his;
+prompt ===[AlterHsoisTabAdd]===
+prompt 
+show user;
+@OutSql\AlterHsoisTabAdd.log;
+rem @OutSql\AlterHsoisTabModify.log;
+
+prompt 执行成功
+
+prompt ------END------
+prompt 
+prompt 回车退出
+prompt 
+
+select &in_s from dual;
+
+select 'ZH_hint:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') d from dual;
+spool off
+
+exit

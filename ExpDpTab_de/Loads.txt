@@ -1,0 +1,30 @@
+SET LINES 50
+SET PAGES 0
+SET ECHO off
+
+DEFINE BAT_PATH1=&1
+DEFINE LOAD_LOG1=&2
+DEFINE dump_PATH1=&3
+
+spool '&LOAD_LOG1'
+prompt AUTHOR:ZH 2016/11/15
+prompt 
+select name  h   from hospital.hosp;
+select '------START:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+show user;
+
+prompt <deferred_segment_creation=false>
+alter system set deferred_segment_creation=false; 
+prompt <directory>
+create or replace directory DPPATH1 as '&dump_PATH1';
+prompt <sys.utl_file>
+grant execute on sys.utl_file to system;
+
+rem ¥¥Ω® ”Õº
+create or replace view hscenter.v_REPORT_id_201611 as
+(select id from hscenter.report_  where owner = 'HSHIS' and REPORT_CATALOG_ID in(   select id from hscenter.REPORT_CATALOG where name like '%[%' and id not in('rc20160908000039','rc20160908000038'))  );
+
+
+select '------END:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+spool off
+exit

@@ -1,0 +1,5 @@
+conn system/tigersysdba@his;
+rem alter system set deferred_segment_creation=false; 
+create directory dpdata1 as 'd:\test\dump';
+alter system set deferred_segment_creation=false; --µ¼³ö¿Õ±í
+exit

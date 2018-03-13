@@ -1,0 +1,37 @@
+SET LINES 100
+SET PAGES 0
+SET ECHO off
+conn hospital/source@his;
+spool log.log
+
+prompt AUTHOR:ZH 2016/11/01
+prompt 
+select name  h   from hospital.hosp;
+select '------START:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+show user;
+
+prompt <DateTime> 
+DEFINE v_date1='2016-10-01 00:00:00'
+select rownum seq,
+       to_char((to_date('&v_date1', 'yyyy/mm/dd hh24:mi:ss') + rownum),
+               'yyyy/mm/dd hh24:mi:ss') || '至' ||
+       to_char((to_date('&v_date1', 'yyyy/mm/dd hh24:mi:ss') + rownum + 1),
+               'yyyy/mm/dd hh24:mi:ss') s,
+       hospital.get_fee_contrast.get_收费员收费金额1(to_date('&v_date1',
+                                                             'yyyy/mm/dd hh24:mi:ss') +
+                                                     rownum,
+                                                     to_date('&v_date1',
+                                                             'yyyy/mm/dd hh24:mi:ss') +
+                                                     rownum + 1) 收费员收费金额,
+       hospital.get_fee_contrast.get_401金额1(to_date('&v_date1',
+                                                      'yyyy/mm/dd hh24:mi:ss') +
+                                              rownum,
+                                              to_date('&v_date1',
+                                                      'yyyy/mm/dd hh24:mi:ss') +
+                                              rownum + 1) 金额
+  from dual
+connect by rownum < 10;
+
+select '------END:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+spool off
+exit

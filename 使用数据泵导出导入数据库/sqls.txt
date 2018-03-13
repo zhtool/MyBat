@@ -1,0 +1,43 @@
+1、登录system用户
+   conn system/tigersysdba@his;
+   
+2、查看dump_dir对象是否已创建
+   select * from dba_directories;
+   
+3、创建DIRECTORY对象
+   3-1、CREATE DIRECTORY dump_dir AS 'd:\dump';
+   3-2、查看目录是否创建成功
+        select * from dba_directories;
+   
+4、授予用户使用DIRECTORY对象权限(用非system用户导入时，比如hospital)
+   GRANT READ, WRITE ON DIRECTORY dump_dir TO hosptial;
+   
+5、导入整个数据库
+   5-1、创建对应的实际目录 'd:\dump'，把导出文件his.dmp拷贝到创建的文件夹dump中
+   5-2、打开cmd，执行下面命令，导入整个数据库
+        impdp system/tigersysdba@his DIRECTORY=dump_dir DUMPFILE=HIS.dmp logfile=expdp.log FULL=Y
+   
+   
+    1、导入表
+       impdp hsiufo/hsiufo directory=dump_dir dumpfile=full.dmp tables=scott.emp remap_schema=scott:scott
+	   注：导入语句有一个全库的逻辑备份 full.dmp，然后删除用户scott的emp表，在full.dmp中导入emp到用户scott
+	   
+	   impdp hsiufo/hsiufo directory=dump_dirdumpfile=full.dmp tables=scott.test remap_schema=scott:system
+	   第一种方法表示将EMP表导入到SCOTT方案中,第二种方法表示将test表导入的SYSTEM方案中.
+       注意,如果要将表导入到其他方案中,必须指定REMAP_SCHEMA选项
+	   
+	2、导入方案
+       impdp hsiufo/hsiufo directory=dump_dir dumpfile=full.dmp schemas=scott
+	   
+       Impdp system/manager DIRECTORY=dump_dir DUMPFILE=schema.dmp SCHEMAS=scott REMAP_SCHEMA=scott:system  
+	   
+    3、导入表空间
+       Impdp system/manager DIRECTORY=dump_dirDUMPFILE=tablespace.dmp TABLESPACES=user01
+	   
+    4、导入数据库
+       Impdp system/manager DIRECTORY=dump_dirDUMPFILE=full.dmp FULL=y	
+	   
+    5、追加数据
+       impdp system/manager DIRECTORY=dpdata1 DUMPFILE=expdp.dmp SCHEMAS=system TABLE_EXISTS_ACTION
+	   
+	      select * from v$version 

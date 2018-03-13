@@ -1,0 +1,24 @@
+prompt ==invoice_man                                                                                
+@.\HOSPITAL_PLB\invoice_man.plb                                                                     
+                                                                                                    
+prompt ==ol_acc                                                                                     
+@.\HOSPITAL_PLB\ol_acc.plb                                                                          
+                                                                                                    
+prompt ==ol_input                                                                                   
+@.\HOSPITAL_PLB\ol_input.plb                                                                        
+                                                                                                    
+prompt ==ol_mhc                                                                                     
+@.\HOSPITAL_PLB\ol_mhc.plb                                                                          
+                                                                                                    
+prompt ==pres                                                                                       
+@.\HOSPITAL_PLB\pres.plb                                                                            
+                                                                                                    
+prompt ==get_order_method_unit                                                                      
+@.\HOSPITAL_PLB\get_order_method_unit.plb                                                           
+                                                                                                    
+prompt ==get_药品处方类型                                                                           
+@.\HOSPITAL_PLB\get_药品处方类型.plb                                                                
+                                                                                                    
+
+已选择7行。
+

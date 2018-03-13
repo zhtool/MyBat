@@ -1,0 +1,3 @@
+wrap iname=D:\MIS\HSMP\HSEMR\HSSQL\proc\PCK_EC.pck oname=E:\MyTools\MyBat\LoadPlbs\Load_Plb\FILES\PLBS\HSEMR_PLB\PCK_EC.plb                                                                                                                                                                                 
+wrap iname=D:\MIS\HSMP\HSEMR\HSSQL\proc\PCK_KB.pck oname=E:\MyTools\MyBat\LoadPlbs\Load_Plb\FILES\PLBS\HSEMR_PLB\PCK_KB.plb                                                                                                                                                                                 
+

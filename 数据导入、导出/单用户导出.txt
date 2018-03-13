@@ -1,0 +1,45 @@
+         --版本服务器exp导出的数据，无法用低版本imp导入解决方法
+         --用客户端低版本exp导出数据，然后用客户端低版本imp导入
+         --不能用full=y导出，要用users导出
+
+exp system/tigersysdba@his file=d:\dxyyhospital.dmp log=D:\dxyyhospital.txt  owner=hospital -------1
+
+exp system/tigersysdba@his file=d:\dxyyhuman.dmp log=D:\dxyyhuman.txt owner=human -------1
+
+exp system/tigersysdba@his file=d:\dxyyver.dmp log=D:\dxyyver.txt owner=ver ------1
+
+exp system/tigersysdba@his file=d:\dxyyHSECASE.dmp log=D:\dxyyHSECASE.txt owner=HSECASE ------1
+
+exp system/tigersysdba@his file=d:\dxyyHSTEND.dmp log=D:\dxyyHSTEND.txt owner=HSTEND ------ 1
+
+exp system/tigersysdba@his file=d:\dxyyHSDOC.dmp log=D:\dxyyHSDOC.txt owner=HSDOC -------
+
+exp system/tigersysdba@his file=d:\dxyyHSRPT.dmp log=D:\dxyyHSRPT.txt owner=HSRPT ------1
+
+exp system/tigersysdba@his file=d:\dxyyCOOPERATEHIS.dmp log=D:\dxyyCOOPERATEHIS.txt owner=COOPERATEHIS -----1
+
+exp system/tigersysdba@his file=d:\dxyyEBL.dmp log=D:\dxyyEBL.txt owner=EBL -------1
+
+exp system/tigersysdba@his file=d:\dxyylisif.dmp log=D:\dxyylisif.txt owner=lisif  ------1
+
+exp system/tigersysdba@his file=d:\dxyyLZYB.dmp log=D:\dxyyLZYB.txt owner=LZYB --------1
+
+exp system/tigersysdba@his file=d:\dxyyHOSPREAD.dmp log=D:\dxyyHOSPREAD.txt owner=HOSPREAD--------1
+
+exp system/tigersysdba@his file=d:\dxyyZLYB.dmp log=D:\dxyyZLYB.txt owner=ZLYB --------1
+
+exp system/tigersysdba@his file=d:\dxyyCOMED.dmp log=D:\dxyyCOMED.txt owner=COMED  ---------1
+
+exp system/tigersysdba@his file=d:\dxyyMEDINSURE.dmp log=D:\dxyyMEDINSURE.txt owner=MEDINSURE -------1
+
+exp system/tigersysdba@his file=d:\dxyyHSMC.dmp log=D:\dxyyHSMC.txt owner=HSMC ------1
+
+exp system/tigersysdba@his file=d:\dxyyHOSP.dmp log=D:\dxyyHOSP.txt owner=HOSP ------1
+
+exp system/tigersysdba@his file=d:\dxyyHSOPER.dmp log=D:\dxyyHSOPER.txt owner=HSOPER ------1
+
+exp system/tigersysdba@his file=d:\dxyyQYYB.dmp log=D:\dxyyQYYB.txt owner=QYYB -----1
+
+exp system/tigersysdba@his file=d:\dxyyPACSIF.dmp log=D:\dxyyPACSIF.txt owner=PACSIF  --------1
+
+exp system/tigersysdba@his file=d:\dxyyHSCONTRL.dmp log=D:\dxyyHSCONTRL.txt owner=HSCONTRL  ------1

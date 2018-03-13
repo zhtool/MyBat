@@ -1,0 +1,18 @@
+
+1、创建逻辑目录  用system用户登录
+create directory dpdata1 as 'd:\test\dump';
+2、创建对应的实际目录 'd:\test\dump'
+3、查看是否存在
+select * from dba_directories;
+4、system用户登录，给特定用户赋予在制定目录的操作权限（按用户导出时使用）
+例如给hospital用户授权：grant read,write on directory dpdata1 to hospital;
+5、导整个数据库
+expdp system/tigersysdba DIRECTORY=dpdata1 DUMPFILE=full.dmp FULL=y;
+
+5-1、导出空数据[只导出数据结构]
+expdp system/tigersysdba DIRECTORY=dpdata1  DUMPFILE=HIS_plzy.dmp content=metadata_only full=Y logfile=ExpDpHis.log
+
+6、按用户导出
+expdp system/tigersysdba@his schemas=hsemr DIRECTORY=dpdata1 DUMPFILE=hsemrDp.dmp logfile=hsemrDp_log.log;
+expdp system/tigersysdba@his schemas=hscenter DIRECTORY=dpdata1 DUMPFILE=hscenterDp.dmp logfile=hscenterDp_log.log;
+expdp system/tigersysdba@his schemas=hsois DIRECTORY=dpdata1 DUMPFILE=HsoisDp.dmp logfile=HsoisDp_log.log;

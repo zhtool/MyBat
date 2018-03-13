@@ -1,0 +1,30 @@
+set pages 0 
+set lines 100
+
+conn hsemr/hsemr@his;
+spool log\log.log
+prompt AUTHOR:ZH 2016/02/27
+prompt
+
+select hospital.get_system_option('医院名称') || ';' || user || ';' ||
+       to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') h
+  from dual;
+prompt 
+prompt ------START------
+prompt 
+
+show user;
+
+prompt 当前版本:
+
+
+prompt ===[LoadTrigger]===
+
+@../../trig/trig_hsemr.sql;
+
+prompt ------END------
+
+select 'ZH_hint:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') d from dual;
+spool off
+
+exit

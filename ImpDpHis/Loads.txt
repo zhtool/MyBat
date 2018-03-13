@@ -1,0 +1,36 @@
+SET LINES 50
+SET PAGES 0
+SET ECHO off
+
+DEFINE BAT_PATH1=&1
+DEFINE LOAD_LOG1=&2
+DEFINE dump_PATH1=&3
+
+spool '&LOAD_LOG1'
+prompt AUTHOR:ZH 2016/11/15
+prompt 
+select name  h   from hospital.hosp;
+select '------START:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+show user;
+
+prompt <set parameter>
+alter system set deferred_segment_creation=false; 
+
+
+rem 空表分配表空间
+alter system set deferred_segment_creation=false; 
+ALTER PROFILE "DEFAULT" LIMIT FAILED_LOGIN_ATTEMPTS UNLIMITED;
+ALTER SYSTEM SET SEC_CASE_SENSITIVE_LOGON = FALSE;
+rem alter system set processes =500 scope=spfile;
+rem alter system set sga_target =1024M scope=spfile; 
+rem alter system set db_files =1024 scope=spfile;
+
+
+prompt <directory>
+create or replace directory DPPATH1 as '&dump_PATH1';
+prompt <sys.utl_file>
+grant execute on sys.utl_file to system;
+
+select '------END:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+spool off
+exit

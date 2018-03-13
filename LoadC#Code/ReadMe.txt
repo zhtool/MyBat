@@ -1,0 +1,83 @@
+
+脚本功能：
+
+  C#代码编译器编译.cs文件
+  用于测试C#代码
+---------------------------------
+
+操作方式：
+
+  执行 loads.bat;
+---------------------------------
+
+运行环境：
+  cmd
+---------------------------------
+ 
+备注：test.cs
+using System;
+namespace zh.test
+{
+    class BaseFunction
+    {
+        /// <summary>
+        /// 域
+        /// </summary>
+        private int _iNum1, _iNum2;
+        /// <summary>
+        /// 属性
+        /// </summary>
+        public int iNum1
+        {
+            get { return _iNum1; }
+            set { _iNum1 = value; }
+        }
+        public int iNum2
+        {
+            get { return _iNum2; }
+            set { _iNum2 = value; }
+        }
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public BaseFunction()
+        {
+            _iNum1 = 1;
+            _iNum2 = 2;
+        }
+
+        public BaseFunction(int inNum1, int inNum2)
+        {
+            _iNum1 = inNum1;
+            _iNum2 = inNum2;
+        }
+        /// <summary>
+        /// 方法
+        /// </summary>
+        /// <returns></returns>
+        public int GetSum()
+        {
+            return _iNum1 + _iNum2;
+        }
+        public int GetSum(int inNum1, int inNum2)
+        {
+            return inNum1 + inNum2;
+        }
+    }
+
+    class MyTestClass
+    {
+        static void Main()
+        {
+            BaseFunction BF = new BaseFunction();
+            System.Console.WriteLine("GetSum()={0}", BF.GetSum());
+            System.Console.WriteLine("GetSum(11,22)={0}", BF.GetSum(11,22));
+            BF.iNum1 = 111;
+            BF.iNum2 = 222;
+            System.Console.WriteLine("BF.iNum ->GetSum()={0}", BF.GetSum());                        
+        }
+    }
+}
+
+
+---------------------------------

@@ -1,0 +1,24 @@
+1.  登陆服务器测试oracle数据库是否安装正确
+   conn /as sysdba
+   select name from v$datafile; //判断数据文件路径，找见数据库安装的路径
+2.备份万维服务器上oracle 11G空数据库 ，停止oracle服务不要在服务上手动停止，用roseHA工具停止。
+3. 修改SetParam\SetParam.sql数据库路径
+4. 修改“空数据导入”所有连接字符串 例如conn system/**@his 修改成 conn system/**@oralce(他们安装的SID)
+   如果本地导入去掉SID也行 例如 conn system/**;
+5.切换服务器，要么用roseHA在线切换，要么关闭掉一台服务器，自动切换到另一台服务器，然后执行第一步操作。
+6.导入路劲和连接没有问题的前提下，开始执行导入HIS数据，按"说明.txt"步骤导入
+  注：那台服务器做导入都可以，只做一次导入。
+7.用system、hospital等用户在本地连接数据库。
+8.客户端连接配置，服务命名配置 （TNS）
+                    net服务名=HIS  、
+                    主机名=万维提供一个对外的虚拟IP 
+                    选择（oracle8或更低版本）SID=oracle 注：万维安装的oracle数据库的SID
+9.登陆数据库 conn /as sysdba;
+             alter system set sec_case_sensitive_logon = false scope=both;
+ 注：oracle 11G对密码大小写敏感 、两台服务器都要修改
+10.用001001登陆测试程序
+11.切换服务器，用客户端登陆测试
+12.手动做冷备份、热备份，然后换成oracle 11g空数据库，测试数据库，HIS热备份导入，测试数据库，再换成HIS冷备份数据，测试数据库
+   注：oracle 11g空数据启动正常、切换HIS冷备份、热备份数据能正常启动，说明数据库能正常使用了
+13.在服务器做HIS备份任务计划（冷备和热备都要做）（参考HIS_BACKUP)
+14.开始往数据库中写数据，观察备份数据是否备份正常。

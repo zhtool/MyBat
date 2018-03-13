@@ -1,0 +1,13 @@
+1、创建逻辑目录  用system用户登录
+create directory dpdata1 as 'd:\test\dump';
+2、创建对应的实际目录 'd:\test\dump'，把导出文件FULL.DMP拷贝到创建的文件夹dump中
+3、查看是否存在
+select * from dba_directories;
+4、整个数据库导入：
+impdp system/tigersysdba DIRECTORY=dpdata1 DUMPFILE=DP_HIS.dmp FULL=y logfile=hsemrDP_HIS_LOG.log
+
+5 按用户导入:
+impdp system/tigersysdba@his schemas=hospital DIRECTORY=dpdata1 DUMPFILE=DP_HIS160818.DMP logfile=DP_HOSPITAL160818_LOG.log
+
+impdp system/tigersysdba@his schemas=HSCENTER DIRECTORY=dpdata1 DUMPFILE=DP_HSCENTER160818.DMP logfile=DPHSCENTER160818_LOG.log
+

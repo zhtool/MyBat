@@ -1,0 +1,1 @@
+sqlplus /nolog @load.sql

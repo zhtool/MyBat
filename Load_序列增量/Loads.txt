@@ -1,0 +1,56 @@
+SET LINES 50
+SET PAGES 0
+SET ECHO off
+--执行前需修改 
+--1、s_sequence_name
+define s_sequence_name="SEQ_PACKAGE"
+--2、增量
+spool log.log
+prompt AUTHOR:ZH 2016/11/01
+prompt 
+select name  h   from hospital.hosp;
+select '---START:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'---' d from dual;
+show user;
+prompt 
+prompt <初值>
+prompt 
+
+select t.sequence_name || ':' || t.last_number s
+  from user_sequences t
+ where t.sequence_name = '&s_sequence_name'
+ order by sequence_name;
+
+prompt 
+prompt <增量>
+prompt 
+
+declare
+  i           integer := 0; 
+  i_increment integer := 5000;--增量
+  v_sql       varchar2(500);
+begin
+  for c in (select user || '.' || sequence_name || '.NEXTVAL' s1,
+                   sequence_name
+              from user_sequences t
+             where sequence_name = '&s_sequence_name'
+             order by sequence_name) loop
+    v_sql := 'declare v_s varchar2(20); begin v_s :=' || c.s1 || '; end;';
+    while i < i_increment loop
+      execute immediate v_sql;
+      i := i + 1;
+    end loop;
+  end loop;
+end;
+/
+
+prompt 
+prompt <结果>
+prompt 
+select t.sequence_name || ':' || t.last_number s
+  from user_sequences t
+ where t.sequence_name = '&s_sequence_name'
+ order by sequence_name;
+ 
+select '---END:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'---' d from dual;
+spool off
+exit

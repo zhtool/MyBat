@@ -1,0 +1,35 @@
+exit;
+set pages 0 
+set lines 100
+conn system/tigersysdba;
+spool log\log.log
+prompt AUTHOR:ZH 2016/06/01
+prompt
+
+select hospital.get_system_option('Ò½ÔºÃû³Æ') || ';' || user || ';' ||
+       to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') h
+  from dual;
+prompt 
+prompt ------START------
+prompt 
+
+show user;
+
+prompt <TruncateHsemrTab>
+@TruncateHsemrTab.txt;
+
+
+prompt <TruncateHsCenterTab>
+rem @TruncateHsCenterTab.txt;
+
+prompt <TruncateHsIns>
+@TruncateHsIns.txt;
+
+prompt <TruncateHospital>
+@TruncateHospital.txt;
+prompt ------END------
+
+select 'ZH_hint:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') d from dual;
+spool off
+
+exit

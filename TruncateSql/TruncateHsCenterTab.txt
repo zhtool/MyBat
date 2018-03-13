@@ -1,0 +1,4 @@
+truncate table hscenter.ROLE_MAPPER;
+truncate table hscenter.WORKER_ROLE;
+truncate table hscenter.WORKER_ROLE_;
+truncate table hscenter.WORKER_ROLE_TEMP;

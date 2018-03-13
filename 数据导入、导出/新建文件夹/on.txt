@@ -1,0 +1,22 @@
+create or replace trigger trig_logon_init
+  after logon on   database
+declare
+  i number;
+begin
+  if user in ('HOSPITAL') then
+    hospital.rpt_case.s_dummy;
+  else
+    begin
+      select 2 into i from hospital.worker where id = substrb( user,3,6);
+      hospital.rpt_case.s_dummy;
+      insert into hospital.login_log(workerid,sid,machine,terminal,program,ip,logon_time)
+      select substrb(user,3,6),sys_context('USERENV', 'SID'),sys_context('USERENV', 'HOST'),
+            sys_context('USERENV', 'TERMINAL'),sys_context('USERENV', 'MODULE'),sys_context('USERENV', 'IPADDRESS'),SYSDATE
+       from dual;
+    exception
+      when others then
+        null;
+    end;
+  end if;
+end trig_logon_init;
+/

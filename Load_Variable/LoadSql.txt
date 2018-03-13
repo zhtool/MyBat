@@ -1,0 +1,34 @@
+SET LINES 50
+SET PAGES 0
+SET ECHO off
+DEFINE s_workerid="001001"
+DEFINE s_in_workerid=&1
+spool log\log.log
+prompt AUTHOR:ZH 2016/11/01
+prompt 
+select name  h   from hospital.hosp;
+select '------START:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+show user;
+prompt 
+prompt <自定义变量>
+prompt 
+select '&s_workerid' s from dual;
+select b.id||':'|| b.name s
+  from hospital.all_worker a, hospital.all_worker b
+ where a.id =  '&s_workerid'
+   and b.deptid = a.deptid
+   and rownum <6
+ order by b.id;
+prompt 
+prompt <传入参数>
+prompt 
+select b.id||':'|| b.name s
+  from hospital.all_worker a, hospital.all_worker b
+ where a.id =  '&s_in_workerid'
+   and b.deptid = a.deptid
+   and rownum <6
+ order by b.id;
+
+select '------END:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') ||'------' d from dual;
+spool off
+exit

@@ -1,0 +1,27 @@
+
+select 'alter table hospital.' || table_name || ' add ' || column_name || ' ' ||
+       decode(data_type,
+              'DATE',
+              data_type,
+              'BLOB',
+              data_type,
+              data_type || '(' || data_length || ')') || ';' s_add,
+       'alter table hospital.' || table_name || ' modify ' || column_name || ' ' ||
+       decode(data_type,
+              'DATE',
+              data_type,
+              'BLOB',
+              data_type,
+              data_type || '(' || data_length || ')') || ';' s_modify
+  from user_tab_columns a
+ where table_name = 'ALL_WORKER_'
+ order by table_name, column_id
+
+
+select 'grant SELECT ON ' || owner || '.' || object_name ||
+       ' TO HOSPITAL, HSEMR,HSOIS,HSHIS_USER,HSINS,HSIPM ;' s
+  from all_objects
+ where owner = 'HSCENTER'
+   and object_type = 'TABLE'
+ order by object_name;
+

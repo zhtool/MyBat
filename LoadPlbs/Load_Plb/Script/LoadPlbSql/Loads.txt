@@ -1,0 +1,49 @@
+set pages 0 
+set lines 100
+
+spool Loads_log.log
+conn /as sysdba;
+show user;
+prompt AUTHOR:ZH 2016/02/27
+  select name || ';' || user || ';' ||
+         to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') h
+    from hospital.hosp;
+prompt ------START------
+
+conn hscenter/hscenter;
+show user;
+prompt ===[LoadHsCenterPck]===
+@LOAD_HSCENTER.TXT;
+
+conn hsemr/hsemr;
+show user;
+prompt ===[LoadHsEmrPck]===
+@LOAD_HSEMR.TXT;
+DROP PACKAGE HSEMR.VITAL_RECORD;
+
+conn hsois/hsois;
+show user;
+prompt ===[LoadHsOisPck]===
+@LOAD_HSOIS.TXT;
+
+conn hospital/source;
+show user;
+prompt ===[LOAD_HOSPITAL]===
+@LOAD_HOSPITAL.TXT;
+
+
+prompt ==tca                                                                                        
+@.\HOSPITAL_PLB\tca.plb   
+
+
+prompt ===[grant]===
+grant execute on PCK_BD to hshis_user;
+
+prompt ------END------
+prompt 
+
+
+select 'ZH_hint:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') d from dual;
+spool off
+
+exit

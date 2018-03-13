@@ -1,0 +1,49 @@
+--1=============================
+conn hsemr/hsemr;
+grant select on hsemr.data_element_  to hsemr1;
+grant select on hsemr.data_group_  to hsemr1;
+grant select on hsemr.data_set_ to hsemr1;
+grant select on hsemr.data_set_versions_ to hsemr1;
+grant select on hsemr.data_set_vs_dg_or_de_ to hsemr1;
+grant select on hsemr.code_value_ to hsemr1;
+grant select on hsemr.code_value_details_ to hsemr1;
+grant select on hsemr.code_value_versions_ to hsemr1;
+--2=============================
+conn hsemr1/hsemr1;
+create table data_element_ as
+select * from hsemr.data_element_
+where rownum = 0
+/
+create table data_group_ as
+select * from hsemr.data_group_
+where rownum = 0
+/
+create table data_set_ as
+select * from hsemr.data_set_
+where rownum = 0
+/
+create table data_set_versions_ as
+select * from hsemr.data_set_versions_
+where rownum = 0
+/
+create table data_set_vs_dg_or_de_ as
+select * from hsemr.data_set_vs_dg_or_de_
+where rownum = 0
+/
+create table code_value_ as
+select * from hsemr.code_value_
+where rownum = 0
+/
+create table code_value_details_ as
+select * from hsemr.code_value_details_
+where rownum = 0
+/
+create table code_value_versions_ as
+select * from hsemr.code_value_versions_
+where rownum = 0
+/
+--3=============================
+¶Ô±È
+
+--4=============================
+insert into hsemr1

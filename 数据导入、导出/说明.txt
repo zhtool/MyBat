@@ -1,0 +1,22 @@
+数据库安装在公用的磁整列上E:\app\Administrator\ 确保SetParam中的路径一致
+1、system用户登录，在服务器上保存出trig_logoff_init、trig_logon_init触发器，用hospital用户登录，在服务器上保存所有的JOBS语句,在服务器上运行loadsa.bat，保存CUSER.SQL。
+
+2、更改SetParam文件中的目录与你安装的oracle目录相同
+3、查看导出的LOG文件中的用户有哪些，对应的修改SetParam文件中的用户授权
+4、执行SetParam批处理
+5、在CMD中执行升级语句中的每一个用户，用户应该与上一步修改的用户相同,注意导出导入文件名与目录要相同。
+6、导入后用sysdba给PUBLIC授权 GRANT EXECUTE ON DBMS_ALERT TO "PUBLIC";
+7、全部导完后，执行一下
+exec dbms_stats.gather_database_stats
+用SYSTEM用户连接，这个统计过程比较慢。
+8、进入PL/SQL进行编译程序
+9、system用户登录，在服务器运行保存出trig_logoff_init、trig_logon_init触发器，用hospital用户登录，在服务器运行保存所有的JOBS语句。
+10、用system用户登录，运行CUSER.SQL语句导入his用户及密码。
+11、如果是oracle 11g 用conn /as sysdba 登陆数据库 ;
+             alter system set sec_case_sensitive_logon = false scope=both;
+ 注：oracle 11G对密码大小写敏感 、两台服务器都要修改。修改以后客户端才能登陆
+
+alter system set processes =500 scope=spfile;
+alter system set sga_target =1024M scope=spfile; 
+alter system set db_files =1024 scope=spfile;
+ 

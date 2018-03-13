@@ -1,0 +1,39 @@
+set pages 0 
+set lines 100
+conn /as sysdba;
+@CrtSql.txt;
+
+spool .\log\Loads_log.log
+show user;
+prompt AUTHOR:ZH 2016/02/27
+  select name || ';' || user || ';' ||
+         to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') h
+    from hospital.hosp;
+prompt ------START------
+GRANT select,UPDATE ON HOSPITAL.RESIDENT_INFO TO HSEMR;
+GRANT select,UPDATE ON HOSPITAL.PATIENT TO HSEMR;
+GRANT select,UPDATE ON HOSPITAL.case_page1_ TO HSEMR;
+grant select,update on lisif.lis_result to hospital;
+grant select,update on pacsif.pacs_result to hospital;
+
+@.\log\grant_execute.sql;
+
+conn sys/tigersysdba@his as sysdba;
+grant execute on sys.dbms_crypto to hospital;
+grant execute on sys.dbms_alert to hospital;
+
+conn /as sysdba;
+
+prompt 升级后版本:
+
+prompt ------END------
+prompt 
+prompt 回车退出
+prompt 
+
+select &in_s from dual;
+
+select 'ZH_hint:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') d from dual;
+spool off
+
+exit
