@@ -1,0 +1,56 @@
+create or replace package doc_manager wrapped 
+a000000
+354
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+9
+1a3 ce
+Uwo2EWUgBF4+xPELOg8NkrI6rQ8wg5m49TOf9b9cuAi/Sv4y0h1l1o561r5Tjo6PFsqFmjE9
+bCGFXKghyhkqFVxq65YZcrOxXPvhenOOFXbWbgB21l/1U458+2kyWpGmveVqdPcwRlz99xqD
+dRQ9GxpNOTn0Tww0bQvj1X/lVXoQcYbWAIxxzEc8oIvhq6x2/Tx0pqBxCVU=
+
+/
+create or replace package body doc_manager wrapped 
+a000000
+354
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+abcd
+b
+586 264
+NEzkbN7R0gDWOsg//HCMlVm4AK0wg42J2UjWfC/pmIvVyR8J6fJOaR/0CfrdFFRE/To1E0i0
+kevpIg6qD9aoLUzlb21EHP9fybkq4lqS8tznvXL/yAigPr2CEvvDYKaLJjauf+vhNeqyvAtZ
+k2pa9HAfAWm294ui2B/z5HFAK8En4UxkblWa0iPT7ViiILBQYNOnKojMziySWpl+FHNnZDPk
+6HtnVRpxgkRZnL0Y7fRsMFF+zlYt3cM1xtvQG/c+P9mtnofm8OYJ/6uXSnYZwCHLn7ykDr+4
+mpRRxrqDmXo3l/eBAB7lE9Q7x09gUeHGxboNh0ROezPSok3jC6Gufubg/dMFqVpE7GA7M1ua
+ban1kcRdYi+pnzNrGnrZ9+A05jWOH2F/JrYmotP29OD7E0R6clvkvwgtyASyBxUU5RnGf/qG
+39fea3M7bjuw7UkDsE1JQe9utqTr27Nq9MuedLc8GlAWu6T+A3uIczKPgDQ8aoTTHL0Spt2z
+N795lby7fPhl9kLt0ZYfhU6Bn+o/uRpu13MJCwP59RLbBUIgytlHLJGaXoenww27eXcZp83R
+wD9x6G3gLA2akJiftaWyIOPKnw==
+
+/

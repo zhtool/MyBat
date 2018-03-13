@@ -1,0 +1,4 @@
+sqlplus /nolog @Load.txt
+
+
+

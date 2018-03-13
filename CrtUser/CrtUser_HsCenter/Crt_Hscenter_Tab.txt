@@ -1,0 +1,512 @@
+-- Create table
+create table FAST_REPORT_SQL
+(
+  RPTID       VARCHAR2(50) not null,
+  OWNER       VARCHAR2(20) not null,
+  HOSPID      VARCHAR2(4) not null,
+  TYPE        VARCHAR2(20) not null,
+  SQL         CLOB not null,
+  OPERATOR    VARCHAR2(10),
+  UPDATE_DATE DATE
+)
+tablespace HSCENTER
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table FAST_REPORT_SQL
+  is 'FAST报表SQL管理';
+-- Create/Recreate indexes 
+create unique index I_PK_FASTREPORT_SQL on FAST_REPORT_SQL (RPTID, OWNER, HOSPID, TYPE)
+  tablespace HSCENTER
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select on FAST_REPORT_SQL to HOSPITAL;
+grant select on FAST_REPORT_SQL to HSHIS_USER;
+
+--
+-- Create table FIELD_DICT
+create table FIELD_DICT 
+(
+  OWNER       VARCHAR2(20) not null,
+  TABLE_NAME  VARCHAR2(30) not null,
+  FIELD_NAME  VARCHAR2(30) not null,
+  FIELD_VALUE VARCHAR2(30) not null,
+  FIELD_MEAN  VARCHAR2(30) not null,
+  TYPE        VARCHAR2(30) not null,
+  STATUS      VARCHAR2(30) not null,
+  SEQ_NO      VARCHAR2(30) not null,
+  UPDATE_DATE DATE not null,
+  OPERATOR    VARCHAR2(10) not null,
+  REMARK      VARCHAR2(30),
+  WUBICODE    VARCHAR2(30),
+  PINYIN      VARCHAR2(30)
+)
+tablespace HSCENTER
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table FIELD_DICT
+  is '数据字典表';
+-- Add comments to the columns 
+comment on column FIELD_DICT.OWNER
+  is '用户名';
+comment on column FIELD_DICT.TABLE_NAME
+  is '表名';
+comment on column FIELD_DICT.FIELD_NAME
+  is '字段名称';
+comment on column FIELD_DICT.FIELD_VALUE
+  is '字段值';
+comment on column FIELD_DICT.FIELD_MEAN
+  is '字段含义';
+-- Create/Recreate indexes 
+create unique index I_PK_FIELD_DICT on FIELD_DICT (OWNER, TABLE_NAME, FIELD_NAME, FIELD_VALUE)
+  tablespace HSIND
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select on FIELD_DICT to HOSPITAL;
+grant select on FIELD_DICT to HSEMR;
+grant select on FIELD_DICT to HSHIS_USER;
+
+
+-- Create table
+create table FILES
+(
+  ID          VARCHAR2(100) not null,
+  OWNER       VARCHAR2(20) not null,
+  HOSPID      VARCHAR2(4) not null,
+  TYPE        VARCHAR2(10) not null,
+  VERSION     VARCHAR2(20) not null,
+  CONTENT     BLOB not null,
+  UPDATE_DATE DATE,
+  OPERATOR    VARCHAR2(20),
+  BRANCHID    VARCHAR2(20),
+  HASHID      VARCHAR2(60),
+  NAME        VARCHAR2(100),
+  SUBDIR      VARCHAR2(100)
+)
+tablespace HSCENTER
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128
+    next 8
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table FILES
+  is '文件信息表';
+-- Add comments to the columns 
+comment on column FILES.ID
+  is '编号';
+comment on column FILES.OWNER
+  is '所属用户';
+comment on column FILES.HOSPID
+  is '医院代码';
+comment on column FILES.TYPE
+  is '文件类别';
+comment on column FILES.VERSION
+  is '文件版本';
+comment on column FILES.CONTENT
+  is '内容';
+comment on column FILES.UPDATE_DATE
+  is '更新日期';
+comment on column FILES.OPERATOR
+  is '操作员';
+comment on column FILES.NAME
+  is '文件名称';
+-- Create/Recreate indexes 
+create unique index I_PK_FILES1 on FILES (NAME, OWNER, HOSPID, TYPE)
+  tablespace HSCENTER
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select on FILES to HOSPITAL;
+grant select on FILES to HSHIS_USER;
+
+
+-- Create table
+create table HELP_
+(
+  OWNER       VARCHAR2(20) not null,
+  ID          VARCHAR2(100) not null,
+  PARENTID    VARCHAR2(100) not null,
+  TITLE       VARCHAR2(100) not null,
+  SEQ         INTEGER,
+  TYPE        VARCHAR2(10),
+  XML         CLOB,
+  HTML        CLOB,
+  OPERATOR    VARCHAR2(10),
+  UPDATE_DATE DATE
+)
+tablespace HSCENTER
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table HELP_
+  is '系统帮助文档';
+-- Add comments to the columns 
+comment on column HELP_.OWNER
+  is '系统编码';
+comment on column HELP_.ID
+  is '菜单按钮';
+comment on column HELP_.PARENTID
+  is '上级菜单ID';
+comment on column HELP_.TITLE
+  is '标题';
+comment on column HELP_.SEQ
+  is '序号';
+comment on column HELP_.TYPE
+  is 'MENU:菜单，CUSTOM:自定义';
+comment on column HELP_.XML
+  is 'XML内容';
+comment on column HELP_.HTML
+  is 'HTML内容';
+comment on column HELP_.OPERATOR
+  is '操作员';
+comment on column HELP_.UPDATE_DATE
+  is '操作日期';
+-- Create/Recreate indexes 
+create unique index I_PK_HELP_ on HELP_ (OWNER, ID)
+  tablespace HSCENTER
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+
+-- Create table
+create table LOG_SYSTEM_OPTION
+(
+  OWNER       VARCHAR2(20),
+  HOSPID      VARCHAR2(4),
+  ID          VARCHAR2(200),
+  OP          VARCHAR2(10),
+  NAME        VARCHAR2(200),
+  UPDATE_DATE DATE,
+  OPERATOR    VARCHAR2(10),
+  REMARK      VARCHAR2(30)
+)
+tablespace HSCENTER
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select on LOG_SYSTEM_OPTION to HOSPITAL;
+grant select on LOG_SYSTEM_OPTION to HSHIS_USER;
+
+
+-- Create table
+create table MENU
+(
+  OWNER       VARCHAR2(20) not null,
+  ID          VARCHAR2(100) not null,
+  PARENTID    VARCHAR2(100) not null,
+  NAME        VARCHAR2(100) not null,
+  SEQ         INTEGER,
+  OPERATOR    VARCHAR2(10),
+  UPDATE_DATE DATE
+)
+tablespace HSCENTER
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128
+    next 8
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate indexes 
+create unique index I_PK_MENU on MENU (OWNER, ID, PARENTID)
+  tablespace HSCENTER
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select on MENU to HOSPITAL;
+grant select on MENU to HSHIS_USER;
+
+
+-- Create table
+create table ROLE
+(
+  OWNER       VARCHAR2(20) not null,
+  HOSPID      VARCHAR2(4) not null,
+  ID          VARCHAR2(20) not null,
+  NAME        VARCHAR2(50) not null,
+  OPERATOR    VARCHAR2(10),
+  UPDATE_DATE DATE,
+  REMARK      VARCHAR2(30)
+)
+tablespace HSCENTER
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table ROLE
+  is '角色表';
+-- Add comments to the columns 
+comment on column ROLE.OWNER
+  is '用户名';
+comment on column ROLE.ID
+  is '角色编号';
+comment on column ROLE.NAME
+  is '角色名称';
+-- Create/Recreate indexes 
+create unique index I_PK_ROLE on ROLE (OWNER, HOSPID, ID)
+  tablespace HSCENTER
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select on ROLE to HOSPITAL;
+grant select on ROLE to HSHIS_USER;
+
+
+-- Create table
+create table ROLE_MENU
+(
+  OWNER       VARCHAR2(20) not null,
+  HOSPID      VARCHAR2(4) not null,
+  ROLEID      VARCHAR2(20) not null,
+  MENUID      VARCHAR2(50) not null,
+  OPERATOR    VARCHAR2(20),
+  UPDATE_DATE DATE
+)
+tablespace HSCENTER
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table ROLE_MENU
+  is '角色菜单';
+-- Add comments to the columns 
+comment on column ROLE_MENU.ROLEID
+  is '角色ID';
+comment on column ROLE_MENU.MENUID
+  is '菜单ID';
+-- Create/Recreate indexes 
+create unique index I_ROLE_MENU on ROLE_MENU (OWNER, HOSPID, ROLEID, MENUID)
+  tablespace HSCENTER
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select on ROLE_MENU to HOSPITAL;
+grant select on ROLE_MENU to HSHIS_USER;
+
+
+-- Create table
+create table SYSTEM_OPTION
+(
+  ID          VARCHAR2(200) not null,
+  OWNER       VARCHAR2(20) not null,
+  HOSPID      VARCHAR2(4) not null,
+  NAME        VARCHAR2(200) not null,
+  UPDATE_DATE DATE not null,
+  OPERATOR    VARCHAR2(10) not null,
+  REMARK      VARCHAR2(30)
+)
+tablespace HSCENTER
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate indexes 
+create unique index I_PK_SYSTEM_OPTION on SYSTEM_OPTION (ID, OWNER, HOSPID)
+  tablespace HSCENTER
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select on SYSTEM_OPTION to HOSPITAL;
+grant select on SYSTEM_OPTION to HSEMR;
+grant select on SYSTEM_OPTION to HSHIS_USER;
+
+
+-- Create table
+create table WORKER_ROLE
+(
+  OWNER       VARCHAR2(20) not null,
+  HOSPID      VARCHAR2(4) not null,
+  WORKERID    VARCHAR2(20) not null,
+  ROLEID      VARCHAR2(20) not null,
+  OPERATOR    VARCHAR2(10),
+  UPDATE_DATE DATE
+)
+tablespace HSCENTER
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 128
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table WORKER_ROLE
+  is '职员角色表';
+-- Add comments to the columns 
+comment on column WORKER_ROLE.OWNER
+  is '用户名';
+comment on column WORKER_ROLE.WORKERID
+  is '职员工号';
+comment on column WORKER_ROLE.ROLEID
+  is '角色编号';
+-- Create/Recreate indexes 
+create unique index I_PK_WORKER_ROLE on WORKER_ROLE (OWNER, HOSPID, WORKERID, ROLEID)
+  tablespace HSCENTER
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select on WORKER_ROLE to HOSPITAL;
+grant select on WORKER_ROLE to HSHIS_USER;
+
+
+grant select on FAST_REPORT_SQL to hsemr;
+grant select on FIELD_DICT to hsemr;
+grant select on FILES to hsemr;
+grant select on HELP_ to hsemr;
+grant select on LOG_SYSTEM_OPTION to hsemr;
+grant select on MENU to hsemr;
+grant select on ROLE to hsemr;
+grant select on ROLE_MENU to hsemr;
+grant select on SYSTEM_OPTION to hsemr;
+grant select on WORKER_ROLE to hsemr;
+
+grant select on FAST_REPORT_SQL to hshis_user;
+grant select on FIELD_DICT to hshis_user;
+grant select on FILES to hshis_user;
+grant select on HELP_ to hshis_user;
+grant select on LOG_SYSTEM_OPTION to hshis_user;
+grant select on MENU to hshis_user;
+grant select on ROLE to hshis_user;
+grant select on ROLE_MENU to hshis_user;
+grant select on SYSTEM_OPTION to hshis_user;
+grant select on WORKER_ROLE to hshis_user;
+
