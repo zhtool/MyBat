@@ -1,0 +1,13 @@
+set pages 0 
+set lines 100
+conn system/tigersysdba;
+
+ALTER SYSTEM SET SEC_CASE_SENSITIVE_LOGON = FALSE;
+rem ALTER PROFILE "DEFAULT" LIMIT FAILED_LOGIN_ATTEMPTS UNLIMITED;
+
+@CrtHsCenter.txt;
+@CrtHsemr.txt;
+@CrtHsOis.txt;
+@CrtHsIns.txt;
+@CrtAmqp.txt;
+exit
