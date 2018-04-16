@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "HsSetup", "HsSetup.isproj", "{14787C36-EC43-4B9F-A80B-DD754B4D3A97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Default = CD_ROM|Default
+		DVD-5|Default = DVD-5|Default
+		SingleImage|Default = SingleImage|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14787C36-EC43-4B9F-A80B-DD754B4D3A97}.CD_ROM|Default.ActiveCfg = CD_ROM
+		{14787C36-EC43-4B9F-A80B-DD754B4D3A97}.CD_ROM|Default.Build.0 = CD_ROM
+		{14787C36-EC43-4B9F-A80B-DD754B4D3A97}.DVD-5|Default.ActiveCfg = DVD-5
+		{14787C36-EC43-4B9F-A80B-DD754B4D3A97}.DVD-5|Default.Build.0 = DVD-5
+		{14787C36-EC43-4B9F-A80B-DD754B4D3A97}.SingleImage|Default.ActiveCfg = SingleImage
+		{14787C36-EC43-4B9F-A80B-DD754B4D3A97}.SingleImage|Default.Build.0 = SingleImage
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal

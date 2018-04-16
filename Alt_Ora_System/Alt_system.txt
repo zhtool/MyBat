@@ -1,0 +1,27 @@
+set pages 0
+set lines 50
+rem set trimspool on
+rem set echo on
+conn system/tigersysdba@his;
+spool log\alter_System.log
+
+select 'Author  : ZH' || chr(13) s,
+       hospital.get_system_option('Ò½ÔºÃû³Æ') || ';' h,
+       chr(13) || user || ';' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') t
+  from dual;
+prompt ^^^^^^^^^^^^^^^^^^Start^^^^^^^^^^^^^^^^^^^^^^^^
+prompt
+prompt ^^^system_option
+
+rem alter system set  sga_target=1024M scope=spfile;
+rem alter system set processes=700 scope=spfile;
+rem alter system set db_files=1024 scope=spfile;
+
+
+
+prompt ^^^^^^^^^^^^^^^^^^^End^^^^^^^^^^^^^^^^^^^^^^^
+select user || ';' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') d from dual;
+
+spool off
+rem set echo off
+exit

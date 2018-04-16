@@ -1,0 +1,44 @@
+set pages 0
+set lines 100
+rem set trimspool on
+rem set echo on
+ conn system/tigersysdba@his;
+spool log\Alter_Database.log
+
+prompt AUTHOR:ZH 
+prompt
+select hospital.get_system_option('Ò½ÔºÃû³Æ') || ';' || user || ';' ||
+       to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') h
+  from dual;
+prompt ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+prompt Start
+prompt
+
+
+rem =====================================
+prompt ====Alter_Tablespace ECASETAB=====
+
+rem =====================================
+prompt ====Alter_Tablespace ECASETAB=====
+
+rem alter tablespace "ECASETAB" resize 3g;
+rem alter tablespace ECASETAB add datafile 'D:\oracle\product\10.1.0\oradata\his\ECASETAB01.dbf' size 20m autoextend on next 20m maxsize 2048m; 
+rem alter tablespace ECASETAB add datafile 'D:\oracle\product\10.1.0\oradata\his\ECASETAB02.dbf' size 20m autoextend on next 20m maxsize 2048m; 
+
+rem delete from hospital.rpt_reg_dd_;
+rem commit;
+prompt ====select Tablespace ECASETAB=====
+
+select tablespace_name, BIGFILE, MAX_EXTENTS
+  from user_tablespaces
+ where tablespace_name like 'ECASETAB%';
+
+
+prompt End
+prompt ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+select 'ZH_hint:' || to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss') d
+  from dual;
+
+spool off
+rem set echo off
+exit

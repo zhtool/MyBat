@@ -1,0 +1,1 @@
+sqlplus /nolog @Alt_system.txt

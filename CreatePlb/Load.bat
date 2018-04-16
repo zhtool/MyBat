@@ -23,7 +23,7 @@ for /d %%i in (HSEMR_PLB,HSOIS_PLB,HSCENTER_PLB,HOSPITAL_PLB) do @if not exist %
 del .\*.* /q/s
 
 cd %BAT_PATH%
-sqlplus sys/tigersysdba as sysdba @LoadSql.txt %FILES_PATH% %BAT_PATH%  %Load_log%  
+sqlplus sys/tigersysdba as sysdba @LoadSql.md %FILES_PATH% %BAT_PATH%  %Load_log%  
 
 cd %FILES_PATH%
 for /d %%i in (HOSPITAL_KRNL,HOSPITAL_PACK,HOSPITAL_PROC,HOSPITAL_EMR_FUNC,HOSPITAL_EMR_PROC,HSCENTER_PROC,HSEMR_FUNC,HSEMR_PROC,HSEMR_TRIG,HSOIS_PACKAGE) do @if exist %%i del .\%%i.txt
