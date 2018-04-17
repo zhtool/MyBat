@@ -1,7 +1,8 @@
 @echo off
+@if not exist log md log
 sqlplus sys/tigersysdba as sysdba @LoadSql.txt
 
-pause
+rem pause
 
 exit
 
