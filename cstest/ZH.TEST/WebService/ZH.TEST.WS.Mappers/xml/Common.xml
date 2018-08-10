@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Common" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <statements>
+    <select id ="Common_GetHospList" parameterClass="Hashtable">
+      select id, name
+      from hospital.hosp_ a
+      order by id
+    </select>
+    <!--得到数据库时间-->
+    <select id="Common_GetDbSysDate" parameterClass="Hashtable">
+      select to_date(to_char(sysdate, nvl(#in_format#, 'YYYY-MM-DD HH24:MI:SS')),
+      nvl(#in_format#, 'YYYY-MM-DD HH24:MI:SS')) sysdatetime
+      from dual
+    </select>
+    <!--查找数据字典(树形菜单)-->
+    <select id="Common_GetFieldDictForTreeList" parameterClass="Hashtable">
+      SELECT FIELD_VALUE ID,
+      0 PARENTID,
+      FIELD_MEAN NAME
+      FROM HSCENTER.FIELD_DICT
+      WHERE (OWNER = #OWNER# OR #OWNER# = '*')
+      AND TABLE_NAME = #TABLE_NAME#
+      AND FIELD_NAME = #FIELD_NAME#
+      AND STATUS = 'ENABLED'
+      ORDER BY TO_NUMBER(SEQ_NO)
+    </select>
+    <!--查询系统选项-->
+    <select id="Common_GetSystemOption" parameterClass="Hashtable">
+      SELECT ID,NAME
+      FROM HSCENTER.SYSTEM_OPTION
+      WHERE ID = #inId#
+    </select>
+    <!--获取职员列表-->
+    <select id="Common_GetAllWorkerForComBox" parameterClass="Hashtable">
+      select id,
+      name
+      from hospital.all_worker a
+      where a.id like #key# || '%'
+      or a.name like #key# || '%'
+      or a.pinyin like upper(#key#) || '%'
+      order by id
+    </select>
+    <!--查询职员列表-->
+    <select id ="Common_GetAllWorkerForTreeList" parameterClass="Hashtable">
+      select id,
+      nvl(parentid, '0') parentid,
+      name,
+      to_char(sequence) sequence,
+      'department' class
+      from hospital.all_department
+      where hospid = #in_hospid#
+      union
+      select id,
+      deptid parentid,
+      id || ' ' || name name,
+      id sequence,
+      'worker' class
+      from hospital.all_worker
+      where hospid = #in_hospid#
+      order by sequence
+    </select>
+    <!--查询部门列表-->
+    <select id ="Common_GetAllDeptForTreeList" parameterClass="Hashtable">
+      SELECT ID,
+      NVL(PARENTID, '0') PARENTID, NAME,
+      TO_CHAR(SEQUENCE) SEQUENCE,
+      'DEPARTMENT' CLASS
+      FROM HOSPITAL.ALL_DEPARTMENT
+      ORDER BY PARENTID, SEQUENCE
+    </select>
+  </statements>
+</sqlMap>
+  

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Login" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <statements>
+    <!--修改职员登录密码-->
+    <update id="Login_UpdateWorkerPwd" parameterClass="Hashtable">
+      update hospital.user_pwd_ a
+      set a.pwd = #in_Key#
+      where a.username = #in_UserName#
+    </update>   
+    <!--职员接口登录-->  
+    <procedure id="P$CHANGE_RELATION_TRANS" parameterMap ="PM$CHANGE_RELATION_TRANS">
+      HIPIF.PCK_HIPIF.CHANGE_RELATION_TRANS
+    </procedure>
+  </statements>
+
+  <parameterMaps>
+    <parameterMap class="Hashtable" id="PM$CHANGE_RELATION_TRANS">
+      <parameter column="IN_OP_TYPE" direction="Input" property="in_op_type"/>
+      <parameter column="IN_FROM_RELATION" direction="Input" property="in_from_relation"/>
+      <parameter column="IN_TO_RELATION" direction="Input" property="in_to_relation"/>
+      <parameter column="IN_REMARK" direction="Input" property="in_remark"/>
+      <parameter column="IN_SEQ" direction="Input" property="in_seq"/>
+    </parameterMap>
+  </parameterMaps> 
+</sqlMap>
