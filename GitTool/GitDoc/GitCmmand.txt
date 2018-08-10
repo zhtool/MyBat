@@ -1,0 +1,235 @@
+
+https://git.hollysource.com
+============================
+Command line instructions
+------------------
+Git global setup
+git config --global user.name "张喜宁"
+git config --global user.email "22432108@qq.com"
+------------------
+Create a new repository
+git clone git@git.hollysource.com:ZhangXN/MyTools.git
+cd MyTools
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+------------------
+Existing folder
+cd existing_folder
+git init
+git remote add origin git@git.hollysource.com:interface/hipif.git
+rem git remote add origin git@git.hollysource.com:ZhangXN/MyTools.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+------------------
+Existing Git repository
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin git@git.hollysource.com:ZhangXN/MyTools.git
+git push -u origin --all
+git push -u origin --tags
+=============================
+安装WinGit并设置
+git config --global user.name "Your Name" 
+git config --global user.email "email@example.com"
+ssh-keygen -t rsa -C "22432108@qq.com" -b 4096
+cat ~/.ssh/id_rsa.pub | clip
+
+---Git global setup
+git config --global user.name "ZhangXN"
+git config --global user.email "22432108@qq.com"
+ssh-keygen -t rsa -C "22432108@qq.com" -b 4096
+cat ~/.ssh/id_rsa.pub | clip
+---Create a new repository
+git clone git@git.hollysource.com:ZhangXN/MyTools.git
+cd MyTools
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+---Existing folder
+cd existing_folder
+git init
+git remote add origin git@git.hollysource.com:ZhangXN/MyTools.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+---Existing Git repository
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin git@git.hollysource.com:ZhangXN/MyTools.git
+git push -u origin --all
+git push -u origin --tags
+=============================
+创建GIT库
+mkdir learngit 
+cd learngit 
+pwd
+git init
+ls -ah
+
+把文件添加到版本库
+git add readme.txt
+git add file2.txt file3.txt 
+git commit -m "add 3 files."
+
+查看当前状态
+git status
+git status -s
+
+查看未提交的修改
+git diff readme.txt
+git diff -- readme.txt
+
+提交修改
+git add readme.txt
+git commit -m "add distributed"
+
+查看版本
+git log --pretty=oneline
+git log --pretty=oneline --graph --abbrev-commit
+
+查看历次执行过的命令
+git reflog
+
+版本回退[前提是未推送到远程库]
+git reset --hard HEAD^
+git reset --hard HEAD~2
+git reset --hard f17dfb
+
+查看文件内容
+cat readme.txt
+
+撤销add到缓存区的修改
+git reset head readme.txt
+撤销工作区的修改
+git checkout -- readme.txt
+
+删除文件
+git add test.txt 
+git commit -m "add test.txt"
+del test.txt [rm test.txt]
+git status
+git rm -- test.txt
+git commit -m "remove test.txt"
+git reflog
+回退到相应版本[找回test.txt]
+git reset --hard d6d7a0d
+
+撤销add到缓存区的修改
+git checkout -- test.txt [--test.txt 表示撤销文件操作，不带"--"表示创建新分支]
+git reflog
+
+
+git remote add origin https://github.com/zhtool001/GitTest.git
+git push -u origin master
+git clone git@github.com:zhtool001/gitskills.git
+===========================
+使用分支： 
+查看分支：git branch 
+创建分支：git branch <name> 
+切换分支：git checkout <name> 
+创建+切换分支：git checkout -b <name> 
+合并某分支到当前分支：git merge <name> 
+删除分支：git branch -d <name>
+推送分支  
+git checkout -b dev
+git branch dev 
+git checkout dev
+git branch
+git checkout master
+git merge dev
+rem git branch -d dev 
+git push -u origin master
+git push -u origin dev 
+
+===========================
+解决冲突
+git checkout -b featurel
+git merge feature1
+git branch -d featurel
+查看分支的合并情况
+git log --graph --pretty=oneline --abbrev-commit
+git log --graph
+
+合并
+git checkout -b dev
+git add readme.md
+git commit -m "add merge"
+git checkout master
+git merge --no-ff -m "merge with no-ff" dev
+git log --graph --pretty=oneline --abbrev-commit
+
+===========================
+分支策略
+首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
+干活都在dev分支上，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；
+===========================
+Bug分支
+branch is dev
+git status
+不提交、储藏现场 git stash
+git checkout master
+git checkout -b issue-101
+git add readme.txt
+git commit -m "fix bug 101"
+git checkout master
+git merge --no-ff -m "merged bug fix 101" issue-101
+git branch -d issue-101
+git checkout dev
+git status
+git stash list
+git stash pop
+git stash list
+git stash apply stash@{0}
+===========================
+Feature 分支 [增加新功能]
+git branch [在dev分支]
+git checkout -b feature-vulcan
+git add vulcan.py
+git commit -m "add feature vulcan"
+git checkout dev
+git merge --no-ff -m "merged feature vulcan"  feature-vulcan
+git log --pretty=oneline --graph -9
+git branch -D feature-vulcan
+git checkout master
+git merge --no-ff -m "merged dev"dev
+===========================
+查看远程库信息
+git remote -v
+推送分支
+git push origin master
+git push origin develop
+git push origin v1.0.3.0
+git push origin --tags
+master分支是主分支，因此要时刻与远程同步；  
+dev分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；  
+bug分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；  
+feature分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。 
+总之，就是在Git中，分支完全可以在本地自己藏着玩，是否推送，视你的心情而定！
+
+===========================
+标签管理[版本发布]
+git tag v1.0.2.0  
+git tag v1.0.1.0  83e66a3
+git tag -d  v1.0.1.0 v1.0.2.0
+git tag -a v1.02 -m "version released" 83e66a3
+git tag -s v0.2 -m "signed version 0.2 released" fec145a [采用PGP么钥签名标签]
+git tag -d  v1.0.2.0
+git push origin :refs/tags/v1.0.2.0[删除远程标签]
+git tag
+git show v1.0.2.0
+===========================
+rem ===忽略特殊文件 git status 时忽略不需要上传的文件
+echo ## https://github.com/github/gitignore>.\.gitignore
+set f_name=.\.gitignore
+echo *.txt>>%f_name%
+echo *.~pck>>%f_name%
+echo gitignore.bat>>%f_name%
+echo GitLoad.bat>>%f_name%
+rem git add .gitignore
+rem git commit -m "modify .gitignore"
+paush
+===========================
