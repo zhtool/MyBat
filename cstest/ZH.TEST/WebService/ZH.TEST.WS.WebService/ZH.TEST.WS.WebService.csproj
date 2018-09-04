@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SampleService.asmx" />
     <Content Include="SqlMap.config">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SqlMap.Designer.cs</LastGenOutput>
@@ -73,6 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleService.asmx.cs">
+      <DependentUpon>SampleService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SqlMap.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
